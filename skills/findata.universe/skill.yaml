@@ -1,9 +1,0 @@
-id: findata.universe
-version: 0.1.0
-summary: List the canonical US-equity universe (~7,851 symbols).
-auth: lumid-pat
-impl: impl.py:call
-inputs: {}
-outputs:
-  type: array
-  description: Each entry is `{symbol}`. Use `findata.symbol.get` to enrich.
