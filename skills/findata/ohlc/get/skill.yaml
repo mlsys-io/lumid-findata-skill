@@ -1,0 +1,16 @@
+id: findata.ohlc.get
+version: 0.1.0
+summary: OHLC bars (1min / 5min / 1d) for one symbol over a date range.
+auth: lumid-pat
+impl: impl.py:call
+inputs:
+  symbol:    {type: string,  required: true,  description: Ticker (any asset class — non-equity daily is auto-rolled from 1-min)}
+  interval:  {type: string,  required: false, default: "1d", enum: ["1min", "5min", "1d"]}
+  start:     {type: string,  required: false, description: ISO-8601. Default per interval (1 d / 7 d / 365 d back)}
+  end:       {type: string,  required: false, description: ISO-8601. Default now}
+outputs:
+  type: object
+  description: |
+    `{symbol, interval, count, bars: [{ts, open, high, low, close, volume}]}`.
+    Server rejects with 400 if the row count would exceed 200,000;
+    pass a coarser interval or a narrower range.

@@ -1,0 +1,18 @@
+id: findata.news.search
+version: 0.1.0
+summary: Full-text search across all news (headline + summary + body).
+auth: lumid-pat
+impl: impl.py:call
+inputs:
+  q:
+    type: string
+    required: true
+    description: |
+      `websearch_to_tsquery` syntax — supports quoted phrases,
+      `+required`, `-excluded` terms.
+  category: {type: string,  required: false, description: optional category filter}
+  since:    {type: string,  required: false, description: ISO-8601 floor (default last 30 d)}
+  limit:    {type: integer, required: false, default: 50, minimum: 1, maximum: 200}
+outputs:
+  type: array
+  description: Same shape as `findata.news.latest`.
